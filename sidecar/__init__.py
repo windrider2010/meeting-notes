@@ -1,0 +1,1 @@
+"""Windows meeting audio sidecar."""

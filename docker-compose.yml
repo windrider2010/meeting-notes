@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: meeting-notes-backend:cpu
+    container_name: meeting-notes-backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MN_BACKEND_HOST_PORT:-18000}:8000"
+    environment:
+      MN_MODEL_SIZE: ${MN_MODEL_SIZE:-small}
+      MN_DEVICE: ${MN_DEVICE:-cpu}
+      MN_COMPUTE_TYPE: ${MN_COMPUTE_TYPE:-int8}
+      MN_LANGUAGE: ${MN_LANGUAGE:-en}
+      MN_TRANSCRIBE_WINDOW_MS: ${MN_TRANSCRIBE_WINDOW_MS:-5000}
+      MN_OUTPUT_DIR: /outputs
+      MN_EXPORT_RETENTION_DAYS: ${MN_EXPORT_RETENTION_DAYS:-365}
+      MN_EXPORT_MAX_SESSIONS: ${MN_EXPORT_MAX_SESSIONS:-200}
+      OMP_NUM_THREADS: ${OMP_NUM_THREADS:-8}
+      HF_HOME: /models-cache
+      XDG_CACHE_HOME: /models-cache
+    volumes:
+      - meeting-notes-models:/models-cache
+      - ${MN_EXPORTS_HOST_DIR:-./outputs}:/outputs
+
+volumes:
+  meeting-notes-models:
