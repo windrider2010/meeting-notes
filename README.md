@@ -86,6 +86,8 @@ GET http://ORACLE_IP:8000/health
 
 The repo includes [backend/Dockerfile](C:/home/dev/meeting-notes/backend/Dockerfile) and [docker-compose.yml](C:/home/dev/meeting-notes/docker-compose.yml) for a CPU-only `faster-whisper` deployment on Oracle ARM.
 
+For a step-by-step production rollout on Oracle Ubuntu, use [docs/oracle-deployment-checklist.md](C:/home/dev/meeting-notes/docs/oracle-deployment-checklist.md).
+
 Preferred path on the Oracle server:
 
 ```bash
